@@ -1,6 +1,7 @@
 <div class="top-30">
-  <h1 class="animated fadeIn">Heroes <small>Marvel and DC</small></h1>
+  <h1 class="animated fadeIn"><small>Buscando: </small>{{text}}</h1>
   <hr>
+  <h2 *ngIf="heroes.length==0">No hay resultados</h2>
   <div class="card-columns">
 
     <div class="card animated fadeIn fast" *ngFor="let heroe of heroes; let i = index">
@@ -9,9 +10,7 @@
         <h4 class="card-title">{{heroe.nombre}}</h4>
         <p class="card-text">{{heroe.bio}}</p>
         <p class="card-text"><small class="text-muted">{{heroe.aparicion}}</small></p>
-        <button (click)="verHeroe(i)"
-         type="button" class="btn btn-outline-primary btn-block pointer">Saber Mas...</button>
-        <!--<a [routerLink]="['/heroe',i]" class="btn btn-outline-primary btn-block">Ver Mas...</a>-->
+        <a [routerLink]="['/heroes']" class="btn btn-outline-primary btn-block">Volver</a>
       </div>
     </div>
 

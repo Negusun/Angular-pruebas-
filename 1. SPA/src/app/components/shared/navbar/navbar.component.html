@@ -22,8 +22,10 @@
     </ul>
 
     <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Find a Heroe">
-      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+      <input class="form-control mr-sm-2" type="text" placeholder="Find a Heroe" (keyup)="buscarHeroe(texto.value)" #texto>
+      <button
+      (click)="buscarHeroe(texto.value)"
+       class="btn btn-outline-primary my-2 my-sm-0" type="button">Search</button>
     </form>
   </div>
 </nav>
