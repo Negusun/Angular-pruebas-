@@ -6,6 +6,13 @@ body{
   padding-bottom: 50px;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
+.img-logo {
+  width: 120px;
+}
 
 .animated {
   -webkit-animation-duration: 1s;

@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import {APP_ROUTING} from './app.routes';
 
 //servicios
+import {HeroesService} from './services/heroes.service';
 
 //componentes
 import { AppComponent } from './app.component';
@@ -13,6 +14,7 @@ import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { HeroesComponent } from './components/heroes/heroes.component';
 import { ErrorComponent } from './components/error/error.component';
+import { HeroeComponent } from './components/heroe/heroe.component';
 
 @NgModule({
   declarations: [
@@ -21,13 +23,16 @@ import { ErrorComponent } from './components/error/error.component';
     HomeComponent,
     AboutComponent,
     HeroesComponent,
-    ErrorComponent
+    ErrorComponent,
+    HeroeComponent
   ],
   imports: [
     BrowserModule,
     APP_ROUTING
   ],
-  providers: [],
+  providers: [
+    HeroesService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
