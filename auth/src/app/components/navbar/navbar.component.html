@@ -7,17 +7,19 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link"[routerLink]="['home']">Home</a>
+        <a class="nav-link" [routerLink]="['home']">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['pricing']">Pricing</a>
       </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['dashboard']">DashBoard</a>
+      <li *ngIf="auth.isAuthenticated()"
+      class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['dashboard']">Dashboard</a>
       </li>
     </ul>
     <span class="navbar-text">
-        <a href="#" class="btn btn-outline-primary">Log In</a>
+      <button class="btn btn-outline-primary btn-margin btn-sm" (click)="auth.login()" *ngIf="!auth.isAuthenticated()">Log in</button>
+      <button class="btn btn-outline-primary btn-margin btn-sm" (click)="auth.logout()" *ngIf="auth.isAuthenticated()">Log out</button>
     </span>
   </div>
 </nav>
