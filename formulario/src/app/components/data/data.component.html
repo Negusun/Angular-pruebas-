@@ -6,14 +6,57 @@
   <div class="col-sm-6">
     <div class="card">
       <div class="card-block">
-        <h4 class="card-title">JSON</h4>
-        <pre class="card-text">{{form.value | json : spacing}}</pre>
+        <h4 class="card-title">Estado : {{ form.valid?"valido":"invalido" }}</h4>
+        <pre class="card-text">{{ form.value | json : spacing }}</pre>
       </div>
     </div>
   </div>
   <div class="col-sm-6">
-        <form [formGroup]="form" (ngSubmit)="guardar()" novalidate="novalidate">
+        <form [formGroup]="form" (ngSubmit)="guardar()">
           <div class="container">
+
+
+            <div class="form-group row" [ngClass]="{'has-danger': !form.get('nomusuario').valid && form.get('nomusuario').dirty }">
+              <label class="col-2 col-form-label">Nombre Usuario</label>
+              <div class="col-md-8">
+
+                <input class="form-control"
+                type="text"
+                placeholder="Nombre Usuario"
+                formControlName="nomusuario">
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-danger': !form.get('password1').valid && form.get('password1').dirty }">
+              <label class="col-2 col-form-label">Password</label>
+              <div class="col-md-8">
+
+                <input class="form-control"
+                type="password"
+                placeholder="Password"
+                formControlName="password1">
+                <div *ngIf="form.get('password1').errors?.required">
+                  Campo requerido
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-danger': !form.get('password2').valid && form.get('password2').dirty }">
+              <label class="col-2 col-form-label">Repetir</label>
+              <div class="col-md-8">
+
+                <input class="form-control"
+                type="password"
+                placeholder="Repetir password"
+                formControlName="password2">
+                <div *ngIf="form.get('password2').errors?.passinvalid">
+                  Las contraseñas no coinciden
+                </div>
+                <div *ngIf="form.get('password2').errors?.required">
+                  Campo requerido
+                </div>
+              </div>
+            </div>
 
             <div formGroupName="nombrecompleto">
 
@@ -106,7 +149,7 @@
 
       <div class="col-md-8" formArrayName="skills">
         <input
-        *ngFor="let skill of form.get('skills').controls; let i = index"        
+        *ngFor="let skill of form.get('skills').controls; let i = index"
         type="text"
         [formControlName]="i"
         class="form-control">
@@ -124,7 +167,6 @@
       <label class="col-2 col-form-label">&nbsp;</label>
       <div class="input-group col-md-8">
         <button
-        [disabled]="!form.valid"
         type="submit" class="btn btn-outline-primary">
         Guardar
       </button>
