@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {FormGroup, FormControl, Validators, FormArray} from '@angular/forms';
 
 @Component({
   selector: 'app-data',
@@ -9,6 +9,15 @@ import {FormGroup, FormControl, Validators} from '@angular/forms';
 export class DataComponent implements OnInit {
 
   form:FormGroup;
+
+  usuario: any = {
+    nombrecompleto:{
+      nombre:'Esteban',
+      apellido:'Bustos'
+    },
+    email:'ngprodev@gmail.com',
+    skills:['Ver Series']
+  }
 
   constructor() { }
 
@@ -31,12 +40,25 @@ export class DataComponent implements OnInit {
       'email': new FormControl('', [
                                       Validators.required,
                                       Validators.pattern('^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.].[a-z]{2,5}')
-                                    ])
+                                    ]),
+      'skills': new FormArray([
+                  new FormControl('', Validators.required)
+      ])
     });
+    this.form.setValue(this.usuario);
   }
 
-  guardar()
-  {
+  newSkill() {
+    (<FormArray>this.form.get('skills')).push(
+      new FormControl('',Validators.required)
+    );
+  }
+
+  quitarSkill() {
+    (<FormArray>this.form.get('skills')).removeAt((<FormArray>this.form.get('skills')).length-1);
+  }
+
+  guardar()  {
     console.log(this.form.value);
   }
 
