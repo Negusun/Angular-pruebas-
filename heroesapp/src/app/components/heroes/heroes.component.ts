@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {HeroesService} from '../../services/heroes.service';
 
 @Component({
   selector: 'app-heroes',
@@ -6,8 +7,25 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class HeroesComponent implements OnInit {
+  heroes:any;
+  constructor(private _heroesService:HeroesService) {
+    this._heroesService.getHeroes()
+      .subscribe(
+        data=>{
+          this.heroes=data;
+        })
+  }
 
-  constructor() { }
+  borrar(key$:string){
+    this._heroesService.borarHeroe(key$)
+      .subscribe(data=>{
+        if(data){
+          console.error(data);
+        }else{
+          delete this.heroes[key$];
+        }
+      });
+  }
 
   ngOnInit() {
   }
