@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm }  from "@angular/forms";
 import { Heroe }  from "../../interface/heroe.interface";
 import { HeroesService } from "../../services/heroes.service";
-import {Router} from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-heroe',
@@ -17,13 +17,22 @@ export class HeroeComponent implements OnInit {
     casa:""
   }
 
-  constructor(private router:Router, private _heroesService: HeroesService) { }
+  new:boolean = false;
+  id:string;
+
+  constructor(private router:Router, private _heroesService: HeroesService, private aRoute:ActivatedRoute) {
+    this.aRoute.params
+      .subscribe(
+        parametros=>{
+          console.log(parametros);
+        }
+      )
+  }
 
   ngOnInit() {
   }
 
   guardar(){
-    console.log(this.heroe);
     this._heroesService.nuevoHeroe(this.heroe)
     .subscribe(
       data=>{
