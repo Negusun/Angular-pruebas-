@@ -1,0 +1,19 @@
+<h3><input [(ngModel)]="nombre" name="nombre" placeholder="nombre" class="form-control"></h3>
+<hr>
+<div id="app-mensajes" class="app-mensajes">
+  <div *ngFor="let chat of _chatService.chats | async"
+  [ngClass]="{'text-right': nombre == chat.nombre}">
+    <span class="badge"
+      [ngClass]="{'badge-primary': nombre == chat.nombre,
+                  'badge-success': nombre != chat.nombre}">
+    {{chat.nombre}}
+    </span>
+    <p>{{chat.mensaje}}</p>
+  </div>
+</div>
+<input
+  [(ngModel)]="mensaje"
+  name="mensaje"
+  (keyup.enter)="enviar()"
+  placeholder="Mensaje"
+  class="form-control" >
